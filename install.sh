@@ -3,12 +3,12 @@ echo '
 export PS1="\e[38;2;136;57;239m\u@sandbox:\w \n>\e[0m"
 ' >> ~/.bashrc
 
-echo "/
-alias cm='chmod u+x'/
-alias ga='git add'/
-alias gs='git status'/
-alias gc='git commit -m'/
-alias gp='git push'/
+echo "
+alias cm='chmod u+x'
+alias ga='git add'
+alias gs='git status'
+alias gc='git commit -m'
+alias gp='git push'
 " >> ~/.bash_aliases
 
 git config --global user.email "sebastionprice@gmail.com"
