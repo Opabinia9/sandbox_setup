@@ -30,7 +30,7 @@ fi
 if [ ! -d "$HOME/holbertonschool-low_level_programming" ]; then
 	git clone https://github.com/Opabinia9/holbertonschool-low_level_programming.git;
 fi
-if [ ! -d "$HOME/holbertonschool-low_level_programming" ]; then
+if [ ! -d "$HOME/sandbox_setup" ]; then
 	git clone https://github.com/Opabinia9/sandbox_setup.git;
 fi
 
