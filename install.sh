@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ ! -f ~/.bashrc ]]; then
+if [[ -f ~/.bashrc ]]; then
 	mv ~/.bashrc ~/.bashrc.bak;
 fi
 wget https://raw.githubusercontent.com/Opabinia9/sandbox_setup/refs/heads/main/.bashrc -o ~/.bashrc
@@ -8,7 +8,7 @@ wget https://raw.githubusercontent.com/Opabinia9/sandbox_setup/refs/heads/main/.
 #export PS1="\e[38;2;136;57;239m\u@sandbox:\w \n>\e[0m"
 #' >> ~/.bashrc
 
-if [[ ! -f ~/.bash_aliases ]]; then
+if [[ -f ~/.bash_aliases ]]; then
 	mv ~/.bash_aliases~/.bash_aliases.bak;
 fi
 wget https://raw.githubusercontent.com/Opabinia9/sandbox_setup/refs/heads/main/.bash_aliases -o ~/.bash_aliases
