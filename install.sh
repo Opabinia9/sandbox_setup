@@ -1,6 +1,7 @@
 #!/bin/bash
+echo "hello, getting bashrc and saving your old one"
 if [[ -f ~/.bashrc ]]; then
-	mv ~/.bashrc ~/.bashrc.bak;
+	mv $HOME/.bashrc $HOME/.bashrc.bak;
 fi
 wget https://raw.githubusercontent.com/Opabinia9/sandbox_setup/refs/heads/main/.bashrc
 
@@ -8,22 +9,25 @@ wget https://raw.githubusercontent.com/Opabinia9/sandbox_setup/refs/heads/main/.
 #export PS1="\e[38;2;136;57;239m\u@sandbox:\w \n>\e[0m"
 #' >> ~/.bashrc
 
-if [[ -f ~/.bash_aliases ]]; then
-	mv ~/.bash_aliases~/.bash_aliases.bak;
+echo "getting aliases and saving your old ones"
+if [[ -f $HOME/.bash_aliases ]]; then
+	mv $HOME/.bash_aliases $HOME/.bash_aliases.bak;
 fi
 wget https://raw.githubusercontent.com/Opabinia9/sandbox_setup/refs/heads/main/.bash_aliases
 
+echo "configuring git"
 git config --global user.email "sebastionprice@gmail.com"
 git config --global user.name "Sebastion"
 git config --global credential.helper 'cache --timeout=7200'
 
-if [[ ! -f ~/git-intro ]]; then
+echo "and downloading your repops"
+if [ ! -d "$HOME/git-intro" ]; then
 	git clone https://github.com/Opabinia9/git-intro.git;
 fi
-if [[ ! -f ~/holbertonschool-shell ]]; then
+if [ ! -d "$HOME/holbertonschool-shell" ]; then
 	git clone https://github.com/Opabinia9/holbertonschool-shell.git;
 fi
-if [[ ! -f ~/holbertonschool-low_level_programming ]]; then
+if [ ! -d "$HOME/holbertonschool-low_level_programming" ]; then
 	git clone https://github.com/Opabinia9/holbertonschool-low_level_programming.git;
 fi
 
