@@ -7,4 +7,6 @@ enjoy
 oneliner for me  
 source <(wget -qO- https://raw.githubusercontent.com/Opabinia9/sandbox_setup/refs/heads/main/install.sh)
 
-TODO: ADD AUTO STARTED TIMER
+TODO:
+ADD AUTO STARTED TIMER
+Refix bashrc prompt with vairable and escapes
