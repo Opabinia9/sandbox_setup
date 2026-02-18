@@ -16,9 +16,9 @@ gitsetup()
 rmdf()
 {
 		DF=("");
-		read -p "Would you like to remove the defualt folders and files from the holberton sandbox\n$DF\ny/n: " remove;
+		read -p "Would you like to remove the defualt folders and files from the holberton sandbox\n$DF\ny/n: " -r remove;
 		if [[ "$remove" == "y" ]];then
-			for d in DF; do
+			for d in $DF; do
 				echo "removing defualts!";
 				rm "$d";
 			done		
@@ -37,7 +37,7 @@ if [[ $SHELL == "usr/bin/bash" ]]; then
 		read -p "Please enter your email" EMAIL;
 		REPOS=("git-intro" "holbertonschool-shell" "holbertonschool-low_level_programming");
 
-		rmdf();
+		rmdf;
 
 		echo "hello, getting bashrc and saving your old one";
 		if [[ -f ~/.bashrc ]]; then
@@ -52,7 +52,7 @@ if [[ $SHELL == "usr/bin/bash" ]]; then
 		wget https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/.bash_aliases;
 
 		echo "configuring git";
-		gitsetup() "$UN" "$EMAIL" "$NAME" "$REPOS";
+		gitsetup "$UN" "$EMAIL" "$NAME" "$REPOS";
 
 		source ~/.bashrc;
 	fi
