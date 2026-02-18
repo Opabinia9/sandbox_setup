@@ -1,40 +1,61 @@
 #!/bin/bash
+gitsetup()
+{
+		git config --global user.email "$2";
+		git config --global user.name "$3";
+		git config --global credential.helper 'cache --timeout=7200';
 
-echo "WARNING: UNTESETED"
-read -p "continue: y/n"
-	echo "Hello and thank you for picking me :)";
-	read -p "Please enter your username" UN;
-	read -p "Please enter your name" NAME;
-	read -p "Please enter your email" EMAIL;
-	echo "hello, getting bashrc and saving your old one";
-	if [[ -f ~/.bashrc ]]; then
-		mv $HOME/.bashrc $HOME/.bashrc.bak;
-	fi
-	wget https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/.bashrc;
+		echo "and downloading your repops";
+		for r in $4; do
+			if [ ! -d "$HOME/$r" ]; then
+				git clone "https://github.com/$1/$r.git";
+			fi
+		done;
+}
 
-	echo "getting aliases and saving your old ones"
-	if [[ -f $HOME/.bash_aliases ]]; then
-		mv $HOME/.bash_aliases $HOME/.bash_aliases.bak;
-	fi
-	wget https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/.bash_aliases;
+rmdf()
+{
+		DF=("")
+		read -p "Would you like to remove the defualt folders and files from the holberton sandbox\n$DF\ny/n: " remove
+		if [[ "$remove" == "y" ]];then
+			for d in DF; do
+				echo "removing defualts!";
+				rm "$d";
+			done		
+		else
+			echo "righty-o, not removing";
+		fi
+}
 
-	echo "configuring git";
-	git config --global user.email "$EMAIL";
-	git config --global user.name "$NAME";
-	git config --global credential.helper 'cache --timeout=7200';
+if [[ $SHELL == "usr/bin/bash" ]]; then
+	echo "WARNING: UNTESETED"
+	read -p "continue: y/n" ans
+	if [[ "$ans" == "y" ]]; then
+		echo "Hello and thank you for picking me :)";
+		read -p "Please enter your username" UN;
+		read -p "Please enter your name" NAME;
+		read -p "Please enter your email" EMAIL;
+		REPOS=("git-intro" "holbertonschool-shell" "holbertonschool-low_level_programming");
 
-	echo "and downloading your repops";
-	if [ ! -d "$HOME/git-intro" ]; then
-		git clone "https://github.com/$UN/git-intro.git";
-	fi
-	if [ ! -d "$HOME/holbertonschool-shell" ]; then
-		git clone "https://github.com/$UN/holbertonschool-shell.git";
-	fi
-	if [ ! -d "$HOME/holbertonschool-low_level_programming" ]; then
-		git clone "https://github.com/$UN/holbertonschool-low_level_programming.git";
-	fi
-	if [ ! -d "$HOME/sandbox_setup" ]; then
-		git clone "https://github.com/$UN/holberton-sandbox-setup.git";
-	fi
+		rmdf()
 
-	source ~/.bashrc
+		echo "hello, getting bashrc and saving your old one";
+		if [[ -f ~/.bashrc ]]; then
+			mv $HOME/.bashrc $HOME/.bashrc.bak;
+		fi
+		wget https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/.bashrc;
+
+		echo "getting aliases and saving your old ones"
+		if [[ -f $HOME/.bash_aliases ]]; then
+			mv $HOME/.bash_aliases $HOME/.bash_aliases.bak;
+		fi
+		wget https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/.bash_aliases;
+
+		echo "configuring git";
+		gitsetup() "$UN" "$EMAIL" "$NAME" "$REPOS"
+
+		source ~/.bashrc;
+	fi
+else
+	echo "Sorry, this is ment for bash not $SHELL"
+fi
