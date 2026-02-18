@@ -27,7 +27,7 @@ rmdf()
 		fi
 }
 
-if [[ $SHELL == "usr/bin/bash" ]]; then
+if [[ $SHELL == *bash ]]; then
 	echo "WARNING: UNTESETED";
 	read -p "continue: y/n" ans;
 	if [[ "$ans" == "y" ]]; then
