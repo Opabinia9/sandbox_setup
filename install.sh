@@ -43,13 +43,13 @@ if [[ $SHELL == *bash ]]; then
 		if [[ -f ~/.bashrc ]]; then
 			mv $HOME/.bashrc $HOME/.bashrc.bak;
 		fi
-		wget https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/.bashrc;
+		wget https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/bashrc;
 
 		echo "getting aliases and saving your old ones";
 		if [[ -f $HOME/.bash_aliases ]]; then
 			mv $HOME/.bash_aliases $HOME/.bash_aliases.bak;
 		fi
-		wget https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/.bash_aliases;
+		wget https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/bash_aliases;
 
 		echo "configuring git";
 		gitsetup "$UN" "$EMAIL" "$NAME" "$REPOS";
