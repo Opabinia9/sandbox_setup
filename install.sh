@@ -22,7 +22,9 @@ rmdf()
 		if [[ "$remove" == "y" ]];then
 			echo "removing defualts!";
 			for d in $DF; do
-				rm -r "$d";
+				if [ -d "$HOME/$d" ]; then
+					rm -r "$d";
+				fi
 			done		
 		else
 			echo "righty-o, not removing";
