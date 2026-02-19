@@ -35,16 +35,24 @@ VCS_F_UNCOMMITED(){
 
 VCS_F_BEHIND(){
 	VCS_BEHIND=$(git rev-list --count HEAD..@{u});
-	VCS_S_BEHIND="⇡"
+	VCS_S_BEHIND="⇣"
 	if [[ "$VCS_BEHIND" > 0 ]]; then
 		echo "$VCS_S_BEHIND$VCS_BEHIND" | xargs | cat -<(echo " ");
+	fi
+}
+
+VCS_F_AHEAD(){
+	VCS_AHEAD=$(git rev-list --count @{u}..HEAD);
+	VCS_S_AHEAD="⇡"
+	if [[ "$VCS_AHEAD" > 0 ]]; then
+		echo "$VCS_S_AHEAD$VCS_AHEAD" | xargs | cat -<(echo " ");
 	fi
 }
 
 VCS_PROMPT(){
 	VCS_BRANCH=$(git branch --show-current 2>/dev/null);
 	if [ "$VCS_BRANCH" ]; then
-		echo "($VCS_BRANCH $(VCS_F_UNTRACKED)$(VCS_F_UNSTAGED)$(VCS_F_UNCOMMITED)$(VCS_F_BEHIND))"
+		echo "($VCS_BRANCH $(VCS_F_UNTRACKED)$(VCS_F_UNSTAGED)$(VCS_F_UNCOMMITED)$(VCS_F_BEHIND)$(VCS_AHEAD))"
 	fi
 }
 
