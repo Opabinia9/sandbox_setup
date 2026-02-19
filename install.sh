@@ -1,12 +1,13 @@
 #!/bin/bash
 gitsetup()
 {
+		REPOS=("git-intro" "holbertonschool-shell" "holbertonschool-low_level_programming");
 		git config --global user.email "$2";
 		git config --global user.name "$3";
 		git config --global credential.helper 'cache --timeout=7200';
 
 		echo "and downloading your repos";
-		for r in $4; do
+		for r in "${REPOS[@]}"; do
 			if [ ! -d "$HOME/$r" ]; then
 				git clone "https://github.com/$1/$r.git";
 			fi
@@ -21,7 +22,7 @@ rmdf()
 		read -p $'y/n: ' -r remove;
 		if [[ "$remove" == "y" ]];then
 			echo "removing defualts!";
-			for d in $DF; do
+			for d in "${DF[@]}"; do
 				if [ -d "$HOME/$d" ]; then
 					rm -r "$d";
 				fi
@@ -39,7 +40,6 @@ if [[ $SHELL == *bash ]]; then
 		read -p "Please enter your username :" UN;
 		read -p "Please enter your name :" NAME;
 		read -p "Please enter your email :" EMAIL;
-		REPOS=("git-intro" "holbertonschool-shell" "holbertonschool-low_level_programming");
 
 		rmdf;
 
@@ -56,7 +56,7 @@ if [[ $SHELL == *bash ]]; then
 		wget -qO ~/.bash_aliases https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/bash_aliases;
 
 		echo "configuring git";
-		gitsetup "$UN" "$EMAIL" "$NAME" "$REPOS";
+		gitsetup "$UN" "$EMAIL" "$NAME";
 
 		source ~/.bashrc;
 	fi
