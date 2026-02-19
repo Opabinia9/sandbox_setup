@@ -28,7 +28,7 @@ VCS_F_UNSTAGED(){
 VCS_PROMPT(){
 	VCS_BRANCH=$(git branch --show-current 2>/dev/null);
 	if [ "$VCS_BRANCH" ]; then
-		echo "($VCS_BRANCH $(VCS_F_UNTRACKED) $(VCS_F_UNSTAGED)"
+		echo "($VCS_BRANCH $(VCS_F_UNTRACKED) $(VCS_F_UNSTAGED))"
 	fi
 }
 
