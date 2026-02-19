@@ -6,7 +6,6 @@ source $HOME/.bash_aliases;
 CYAN="\[\e[38;2;25;249;216m\]";
 
 MPC=$CYAN;
-AE="$(tput sgr0)";
 
 ###VCS_PROMPT
 VCS_F_UNTRACKED(){
@@ -60,7 +59,7 @@ VCS_PROMPT(){
 prompt() {
 	L1="\u@sandbox:\w jobs:\j";
 	R1="$(VCS_PROMPT)";
-	L2="\n>$AE";
+	L2="\n>$(tput sgr0)";
         PS1=$(printf "%s%*s%s%s" "$MPC" "$(tput cols)" "$R1\r" "$L1" "$L2");
 }
 PROMPT_COMMAND=prompt
