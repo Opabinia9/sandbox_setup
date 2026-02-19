@@ -2,9 +2,13 @@
 
 source $HOME/.bash_aliases;
 
-MPC="\[\e[38;2;25;249;216m\]";
-AE="\[\e[0m\]";
+###Colors
+CYAN="\[\e[38;2;25;249;216m\]";
 
+MPC=$CYAN;
+AE="$(tput sgr0)";
+
+###VCS_PROMPT
 VCS_F_UNTRACKED(){
 	VCS_UNTRACKED=$(git status --porcelain | grep "??" | wc -l);
 	VCS_S_UNTRACKED="?"
@@ -17,6 +21,8 @@ VCS_PROMPT(){
 	VCS_BRANCH=$(git branch --show-current);
 	echo "($VCS_BRANCH $(VCS_F_UNTRACKED)"
 }
+
+###PROMPT
 prompt() {
 	L1="\u@sandbox:\w jobs:\j";
 	R1="$(VCS_PROMPT)";
