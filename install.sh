@@ -17,7 +17,7 @@ rmdf()
 {
 		DF=("empty_directory" "git-intro" "my_school" "not_here" "old_school" "ready_to_be_removed" "school");
 		echo "Would you like to remove the defualt folders and files from the holberton sandbox";
-		echo $DF;
+		echo $DF[@];
 		read -p $'y/n: ' -r remove;
 		if [[ "$remove" == "y" ]];then
 			for d in $DF; do
