@@ -8,16 +8,16 @@ CYAN="\[\e[38;2;25;249;216m\]";
 MPC=$CYAN;
 
 ###VCS_PROMPT
-     clean='\[\e[0;38;2;93;213;3m\]'   # green foreground
-  modified='\[\e[0;38;2;211;173;3m\]'  # yellow foreground
- untracked='\[\e[0;38;2;0;172;253m\]'   # blue foreground
+     clean='\[\e[38;2;93;213;3m\]'   # green foreground
+  modified='\[\e[38;2;211;173;3m\]'  # yellow foreground
+ untracked='\[\e[38;2;0;172;253m\]'   # blue foreground
 
 VCS_F_UNTRACKED(){
 	VCS_UNTRACKED=$(git status --porcelain |sed 's/^ //'| grep ^"??" | wc -l);
 	VCS_S_UNTRACKED="?"
 	if [[ "$VCS_UNTRACKED" > 0 ]]; then
 		VCS_P_UNTRACKED="${untracked}${VCS_S_UNTRACKED}${VCS_UNTRACKED}";
-		echo " " | cat - <(echo "${VCS_P_UNTRACKED}" | xargs) | tr -d '\n';
+		echo "$(tput sgr0) " | cat - <(echo "${VCS_P_UNTRACKED}" | xargs) | tr -d '\n';
 	fi
 }
 
@@ -26,7 +26,7 @@ VCS_F_UNSTAGED(){
 	VCS_S_UNSTAGED="!"
 	if [[ "$VCS_UNSTAGED" > 0 ]]; then
 		VCS_P_UNSTAGED="${modified}${VCS_S_UNSTAGED}${VCS_UNSTAGED}";
-		echo " " | cat - <(echo "${VCS_P_UNSTAGED}" | xargs) | tr -d '\n';
+		echo "$(tput sgr0) " | cat - <(echo "${VCS_P_UNSTAGED}" | xargs) | tr -d '\n';
 	fi
 }
 
@@ -35,7 +35,7 @@ VCS_F_UNCOMMITED(){
 	VCS_S_UNCOMMITED="+"
 	if [[ "$VCS_UNCOMMITED" > 0 ]]; then
 		VCS_P_UNCOMMITED="${modified}${VCS_S_UNCOMMITED}${VCS_UNCOMMITED}";
-		echo " " | cat - <(echo "${VCS_P_UNCOMMITED}" | xargs) | tr -d '\n';
+		echo "$(tput sgr0) " | cat - <(echo "${VCS_P_UNCOMMITED}" | xargs) | tr -d '\n';
 	fi
 }
 
@@ -44,7 +44,7 @@ VCS_F_BEHIND(){
 	VCS_S_BEHIND="⇣"
 	if [[ "$VCS_BEHIND" > 0 ]]; then
 		VCS_P_BEHIND="${clean}${VCS_S_BEHIND}${VCS_BEHIND}";
-		echo " " | cat - <(echo "${VCS_P_BEHIND}" | xargs) | tr -d '\n';
+		echo "$(tput sgr0) " | cat - <(echo "${VCS_P_BEHIND}" | xargs) | tr -d '\n';
 	fi
 }
 
@@ -53,7 +53,7 @@ VCS_F_AHEAD(){
 	VCS_S_AHEAD="⇡"
 	if [[ "$VCS_AHEAD" > 0 ]]; then
 		VCS_P_AHEAD="${clean}${VCS_S_AHEAD}${VCS_AHEAD}";
-		echo " " | cat - <(echo "${VCS_P_AHEAD}" | xargs) | tr -d '\n';
+		echo "$(tput sgr0) " | cat - <(echo "${VCS_P_AHEAD}" | xargs) | tr -d '\n';
 	fi
 }
 
