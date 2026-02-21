@@ -1,39 +1,57 @@
 #!/bin/bash
-echo "hello, getting bashrc and saving your old one"
-if [[ -f ~/.bashrc ]]; then
-	mv $HOME/.bashrc $HOME/.bashrc.bak;
-fi
-wget https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/.bashrc
+gitsetup()
+{
+		REPOS=("git-intro" "holbertonschool-shell" "holbertonschool-low_level_programming");
+		git config --global user.email "sebastionprice@gmail.com";
+		git config --global user.name "Sebastionprice";
+		git config --global credential.helper 'cache --timeout=7200';
 
-#echo '
-#export PS1="\e[38;2;136;57;239m\u@sandbox:\w \n>\e[0m"
-#' >> ~/.bashrc
+		echo "and downloading your repos";
+		for r in "${REPOS[@]}"; do
+			if [ ! -d "$HOME/$r" ]; then
+				git clone "https://github.com/Opabinia9/$r.git";
+			fi
+		done;
+}
 
-echo "getting aliases and saving your old ones"
-if [[ -f $HOME/.bash_aliases ]]; then
-	mv $HOME/.bash_aliases $HOME/.bash_aliases.bak;
-fi
-wget https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/.bash_aliases
+rmdf()
+{
+		DF=("empty_directory" "my_school" "not_here" "old_school" "ready_to_be_removed" "school");
+		echo "Would you like to remove the defualt folders and files from the holberton sandbox";
+		echo "${DF[*]}";
+		read -p $'y/n: ' -r remove;
+		if [[ "$remove" == "y" ]];then
+			echo "removing defualts!";
+			for d in "${DF[@]}"; do
+				if [[ -d "$HOME/$d" || -f "$HOME/$d" ]]; then
+					rm -r "$d";
+				fi;
+			done		
+		else
+			echo "righty-o, not removing";
+		fi
+}
 
-echo "configuring git"
-git config --global user.email "sebastionprice@gmail.com"
-git config --global user.name "Sebastion"
-git config --global credential.helper 'cache --timeout=7200'
+if [[ $SHELL == *bash ]]; then
 
-echo "and downloading your repops"
-if [ ! -d "$HOME/git-intro" ]; then
-	git clone https://github.com/Opabinia9/git-intro.git;
-fi
-if [ ! -d "$HOME/holbertonschool-shell" ]; then
-	git clone https://github.com/Opabinia9/holbertonschool-shell.git;
-fi
-if [ ! -d "$HOME/holbertonschool-low_level_programming" ]; then
-	git clone https://github.com/Opabinia9/holbertonschool-low_level_programming.git;
-fi
-if [ ! -d "$HOME/sandbox_setup" ]; then
-	git clone https://github.com/Opabinia9/holberton-sandbox-setup.git;
-fi
+	rmdf;
+	
+	echo "hello, getting bashrc and saving your old one";
+	if [[ -f ~/.bashrc ]]; then
+		mv $HOME/.bashrc $HOME/.bashrc.bak;
+	fi
+	wget -qO ~/.bashrc https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/bashrc;
 
-echo "-Wall -pedantic -Werror -Wextra -std=gnu89" > holbertonschool-low_level_programming/flags
+	echo "getting aliases and saving your old ones";
+	if [[ -f $HOME/.bash_aliases ]]; then
+		mv $HOME/.bash_aliases $HOME/.bash_aliases.bak;
+	fi
+	wget -qO ~/.bash_aliases https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/bash_aliases;
 
-source ~/.bashrc
+	echo "configuring git"
+	gitsetup;
+	
+	source ~/.bashrc
+else
+	echo "Sorry, this is ment for bash not $SHELL";
+fi
